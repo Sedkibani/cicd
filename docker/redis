@@ -1,0 +1,21 @@
+//Dockerfile 
+FROM redis:latest
+
+# Expose the default Redis port
+EXPOSE 6379
+
+# Copy the Redis configuration file
+COPY redis.conf /usr/local/etc/redis/redis.conf
+
+# Run Redis with the specified configuration file
+CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]
+//docker-composer 
+version: '3'
+
+services:
+  redis:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 6379:6379
